@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "CONFIG_102": {
+      "function": [
+        "console.log"
+      ]
+    }
+  },
+  "config": {
+    "function": {
+      "matchTrace": [
+        "7.config102.js"
+      ],
+      "showThis": true
+    }
+  }
+}

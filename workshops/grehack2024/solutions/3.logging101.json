@@ -1,0 +1,20 @@
+{
+  "hooks": {
+    "LOGGING_101": {
+      "attribute": [
+        "set:Element.prototype.innerHTML",
+        "mizu"
+      ],
+      "function": [
+        "URLSearchParams.prototype.get"
+      ],
+      "event": [
+        "error"
+      ],
+      "class": [
+        "Function"
+      ]
+    }
+  },
+  "config": {}
+}

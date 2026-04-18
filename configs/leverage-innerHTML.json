@@ -1,0 +1,77 @@
+{
+  "hooks": {
+    "REQUIRED": {
+      "attribute": [
+        "set:Element.prototype.innerHTML"
+      ]
+    },
+    "SELECTORS": {
+      "function": [
+        "document.querySelector",
+        "document.querySelectorAll",
+        "document.getElementById",
+        "document.getElementsByName",
+        "document.getElementsByTagName",
+        "document.getElementsByTagNameNS",
+        "document.getElementsByClassName",
+        "Element.prototype.querySelector",
+        "Element.prototype.querySelectorAll",
+        "Element.prototype.getElementsByName",
+        "Element.prototype.getElementsByTagName",
+        "Element.prototype.getElementsByTagNameNS",
+        "Element.prototype.getElementsByClassName"
+      ]
+    },
+    "ATTRIBUTES": {
+      "attribute": [
+        "get:HTMLElement.prototype.dataset"
+      ],
+      "function": [
+        "Element.prototype.getAttribute"
+      ]
+    },
+    "EVENT": {
+      "event": [
+        "hashchange",
+        "click",
+        "focus"
+      ]
+    },
+    "CLOBBERING": {
+      "attribute": [
+        "document.currentScript",
+        "document.scripts",
+        "document.forms",
+        "document.images",
+        "document.links",
+        "document.styleSheets",
+        "document.embeds",
+        "document.doctype",
+        "document.plugins",
+        "document.defaultView"
+      ]
+    }
+  },
+  "config": {
+    "event": {
+      "alert": {
+        "match": [
+          "eval",
+          "innerHTML",
+          "outerHTML"
+        ],
+        "notification": true
+      }
+    },
+    "REQUIRED": {
+      "match": [
+        "canary"
+      ]
+    },
+    "SELECTORS|ATTRIBUTES|CLOBBERING": {
+      "requiredHooks": [
+        "REQUIRED"
+      ]
+    }
+  }
+}

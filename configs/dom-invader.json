@@ -1,0 +1,108 @@
+{
+  "hooks": {
+    "DOM": {
+      "attribute": [
+        "set:Element.prototype.innerHTML",
+        "set:Element.prototype.outerHTML",
+        "set:HTMLAnchorElement.prototype.href",
+        "set:HTMLButtonElement.prototype.formAction",
+        "set:HTMLFormElement.prototype.action",
+        "set:HTMLIFrameElement.prototype.src",
+        "set:HTMLIFrameElement.prototype.srcdoc",
+        "set:HTMLInputElement.prototype.formAction",
+        "set:HTMLScriptElement.prototype.innerHTML",
+        "set:HTMLScriptElement.prototype.innerText",
+        "set:HTMLScriptElement.prototype.text",
+        "set:HTMLScriptElement.prototype.textContent",
+        "set:HTMLScriptElement.prototype.src"
+      ],
+      "function": [
+        "Element.prototype.insertAdjacentHTML",
+        "Element.prototype.setAttribute",
+        "HTMLScriptElement.prototype.append",
+        "HTMLScriptElement.prototype.appendChild"
+      ]
+    },
+    "EVAL": {
+      "function": [
+        "eval",
+        "Function",
+        "setInterval",
+        "setTimeout"
+      ]
+    },
+    "JQUERY": {
+      "function": [
+        "$",
+        "jQuery",
+        "jQuery.globalEval",
+        "jQuery.parseHTML",
+        "jQuery.prototype.add",
+        "jQuery.prototype.after",
+        "jQuery.prototype.attr",
+        "jQuery.prototype.append",
+        "jQuery.prototype.appendTo",
+        "jQuery.prototype.before",
+        "jQuery.prototype.constructor",
+        "jQuery.prototype.has",
+        "jQuery.prototype.html",
+        "jQuery.prototype.index",
+        "jQuery.prototype.init",
+        "jQuery.prototype.insertAfter",
+        "jQuery.prototype.insertBefore",
+        "jQuery.prototype.prepend",
+        "jQuery.prototype.prependTo",
+        "jQuery.prototype.prop",
+        "jQuery.prototype.replaceAll",
+        "jQuery.prototype.replaceWith",
+        "jQuery.prototype.wrap",
+        "jQuery.prototype.wrapAll",
+        "jQuery.prototype.wrapInner"
+      ]
+    },
+    "NAVIGATION": {
+      "function": [
+        "history.pushState",
+        "history.replaceState",
+        "navigation.navigate",
+        "window.open"
+      ]
+    },
+    "REQUESTS": {
+      "function": [
+        "fetch",
+        "XMLHttpRequest.prototype.open",
+        "XMLHttpRequest.prototype.setRequestHeader",
+        "XMLHttpRequest.prototype.send"
+      ]
+    },
+    "PSTMSG": {
+      "function": [
+        "window.postMessage"
+      ],
+      "event": [
+        "message"
+      ]
+    },
+    "MISC": {
+      "function": [
+        "document.implementation.createHTMLDocument",
+        "execScript",
+        "msSetImmediate",
+        "navigator.serviceWorker.register",
+        "Range.prototype.createContextualFragment",
+        "setImmediate"
+      ],
+      "attribute": [
+        "document.cookie",
+        "document.domain",
+        "window.name"
+      ],
+      "class": [
+        "WebSocket",
+        "URL"
+      ]
+    }
+  },
+  "config": {}
+}

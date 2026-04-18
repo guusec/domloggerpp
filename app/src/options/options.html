@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Js -->
+    <script src="./js/datatables.min.js"></script>
+    <script src="./js/codemirror.min.js"></script>
+    <script src="./js/codemirror-mode.min.js"></script>
+    <script type="module" src="./js/main.js"></script>
+    <!-- Css -->
+    <link rel="stylesheet" href="./css/datatables.min.css">
+    <link rel="stylesheet" href="./css/margin.css">
+    <link rel="stylesheet" href="./css/codemirror.min.css">
+    <link rel="stylesheet" href="./css/dracula.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body id="main">
+    <div id="sidebar">
+        <section id="sidebar-content-top">
+            <a id="page-title" href="https://github.com/kevin-mizu/domloggerpp" target="_blank">
+                <h1 class="mgb-30">DOMLogger++</h1>
+            </a>
+            <nav id="sidebar-tabs">
+                <ul>
+                    <li><a class="tablink" href="#settings">
+                        <svg width="15px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/gear-solid.svg#gear-icon"></use>
+                        </svg>
+                        <span>Settings</span>
+                    </a></li>
+                    <li><a class="tablink" href="#domains">
+                        <svg width="15px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/bullseye-solid.svg#bullseye-icon"></use>
+                        </svg>
+                        <span>Domains</span>
+                    </a></li>
+                    <li id="removeHeaders-tab"><a class="tablink" href="#removeHeaders">
+                        <svg width="15px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/trash-solid.svg#trash-icon"></use>
+                        </svg>
+                        <span>Remove Headers</span>
+                    </a></li>
+                    <li id="pwnfox-tab" style="display: none;"><a class="tablink" href="#pwnfox">
+                        <svg width="15px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/firefox-browser.svg#firefox-icon"></use>
+                        </svg>
+                        <span>PwnFox</span>
+                    </a></li>
+                    <li><a class="tablink" href="#caido">
+                        <svg width="18px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/webhook-solid.svg#webhook-icon"></use>
+                        </svg>
+                        <span>Caido</span>
+                    </a></li>
+                    <li><a class="tablink" href="#burp">
+                        <svg width="18px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/webhook-solid.svg#webhook-icon"></use>
+                        </svg>
+                        <span>Burp Suite</span>
+                    </a></li>
+                    <li><a class="tablink" href="#webhook">
+                        <svg width="18px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/webhook-solid.svg#webhook-icon"></use>
+                        </svg>
+                        <span>Webhook</span>
+                    </a></li>
+                    <li><a class="tablink" href="#devtools">
+                        <svg width="15px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/hammer-solid.svg#hammer-icon"></use>
+                        </svg>
+                        <span>Devtools</span>
+                    </a></li>
+                    <li><a id="tablink-customize" class="tablink" href="#customize">
+                        <svg width="15px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/pen-solid.svg#pen-icon"></use>
+                        </svg>
+                        <span>Customize</span>
+                    </a></li>
+                    <li><a class="tablink" href="#customizeColor">
+                        <svg width="15px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/palette-solid.svg#palette-icon"></use>
+                        </svg>
+                        <span>Colors</span>
+                    </a></li>
+                    <hr>
+                    <li><a class="tablink" href="#about">
+                        <svg width="15px" viewBox="0 0 512 512" class="background-color mgr-10">
+                            <use xlink:href="./img/circle-info-solid.svg#circle-info-icon"></use>
+                        </svg>
+                        <span>About</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </section>
+        <section id="sidebar-content-bottom">
+            <hr>
+            <div id="sidebar-icons">
+                <a class="icon" href="https://github.com/kevin-mizu/domloggerpp" target="_blank">
+                    <svg width="18px" viewBox="0 0 512 512" class="background-color mgr-10">
+                        <use xlink:href="./img/github-solid.svg#github-icon"></use>
+                    </svg>
+                </a>
+                <a class="icon" href="https://twitter.com/kevin_mizu" target="_blank">
+                    <svg width="18px" viewBox="0 0 512 512" class="background-color mgr-10">
+                        <use xlink:href="./img/twitter-solid.svg#twitter-icon"></use>
+                    </svg>
+                </a>
+            </div>
+            <span>v1.0.11</span>
+        </section>
+    </div>
+
+    <div id="main-content">
+        <div id="settings" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">Hooking settings</h1>
+            <p>Welcome to the domain configuration menu. Here, you can create your own hooking configuration, which can be used to retrieve information about any attribute, function, class... occurring within the JavaScript execution of your target domains :D</p>
+            <div class="mgt-10 action-bar">
+                <select id="hook" name="hook" class="mgr-30" style="width: 100%;"></select>
+
+                <svg id="add" width="25px" viewBox="0 0 512 512" class="pointer text-color mgl-10 mgr-10">
+                    <title>Create</title>
+                    <use xlink:href="./img/plus-solid.svg#plus-icon"></use>
+                </svg>
+                <svg id="rename" width="21px" viewBox="0 0 512 512" class="pointer text-color mgl-10 mgr-10">
+                    <title>Rename</title>
+                    <use xlink:href="./img/pen-solid.svg#pen-icon"></use>
+                </svg>
+                <svg id="save" width="21px" viewBox="0 0 512 512" class="pointer text-color mgl-10 mgr-10">
+                    <title>Save</title>
+                    <use xlink:href="./img/floppy-disk-solid.svg#floppy-disk-icon"></use>
+                </svg>
+                <svg id="remove" width="21px" viewBox="0 0 512 512" class="pointer text-color mgl-10 mgr-10">
+                    <title>Remove</title>
+                    <use xlink:href="./img/trash-solid.svg#trash-icon"></use>
+                </svg>
+                <svg id="import" width="21px" viewBox="0 0 512 512" class="pointer text-color mgl-10 mgr-10">
+                    <title>Import</title>
+                    <use xlink:href="./img/file-import-solid.svg#file-import-icon"></use>
+                </svg>
+                <input type="file" id="importFile" hidden>
+            </div>
+            <div class="json-editor mgb-10">
+                <textarea id="editor" disabled></textarea>
+            </div>
+            <span class="error" id="errorConfig"></span>
+
+            <div id="modal" class="modal">
+                <div id="modal-content" class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 id="modalTitle" class="mgb-30"></h3>
+                    <input class="mgb-20" id="hookName" placeholder="name">
+                    <input id="modalAction" hidden>
+                    <button id="modalButton"></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="domains" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">Domains (regex)</h1>
+            <p>Welcome to the domain configuration menu. Here you can configure which domains you want DOMLogger++ to work on.</p>
+            <input id="addDomains" name="addDomains" class="mgt-10 mgb-30" placeholder="mizu.re">
+            <div id="allowedDomains" class="mgb-20"></div>
+        </div>
+
+        <div id="removeHeaders" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">Remove Headers</h1>
+            <p>Welcome to the Remove Headers customization menu. Here you can choose whether or not you want to remove the response headers you've specified in your configuration file.</p>
+            <div class="mgt-30 mgb-10">
+                <button class="removeHeaders-button" data-data="yes" style="background-color: #1B1B1D"><b>YES</b></button>
+                <button class="removeHeaders-button" data-data="no"><b>NO</b></button>
+            </div>
+        </div>
+
+        <div id="pwnfox" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">PwnFox</h1>
+            <p>Welcome to the PwnFox customization menu. Here you can choose whether or not you want to allow every PwnFox container to be checked by default.</p>
+            <div class="mgt-30 mgb-10">
+                <button class="pwnfox-button" data-data="yes" style="background-color: #1B1B1D"><b>YES</b></button>
+                <button class="pwnfox-button" data-data="no"><b>NO</b></button>
+            </div>
+        </div>
+
+        <div id="caido" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">Caido</h1>
+            <p>Welcome to the Caido webhook menu. Here, you can connect your DOMLogger++ extension to your Caido instance to retrieve data in the associated plugin.</p>
+
+            URL: <input id="caidoURL" name="caidoURL" placeholder="http://localhost:8080/" class="mgt-10 mgb-20" width="100%"><br>
+
+            <button id="caido-auth-btn" class="oauth-btn caido mgb-50">
+                <div class="provider-logo"><img src="./img/logo.color.webp" style="height: 20px;"></div>
+                <div class="provider-text">Setup the Caido connection</div>
+            </button>
+
+            <div class="mgb-50" style="text-align: left;">
+                <h3 class="mgr-5">Current session information</h5>
+
+                <u>DOMLogger++ plugin ID</u>:
+                <span id="caido-pluginID" class="mgr-10">N/A</span><br>
+
+                <u>Access token expiration date</u>:
+                <span id="caido-accessTokenExpiration" class="mgr-10">N/A</span><br>
+
+                <u>Refresh token expiration date</u>:
+                <span id="caido-refreshTokenExpiration" class="mgr-10">N/A</span><br>
+                
+                <u>Enable/disable Caido webhook</u>:
+                <div class="mgt-15" style="text-align: center;">
+                    <button class="caidoWebhook-button" data-data="yes" style="background-color: #1B1B1D"><b>YES</b></button>
+                    <button class="caidoWebhook-button" data-data="no"><b>NO</b></button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="mgt-10 mgb-10">
+                <h3 class="mgb-0" style="text-align: left;">Authentication logs</h3>
+
+                <div id="caido-auth-logs" style="padding-bottom: 10px; text-align: left;"></div>
+            </div>
+
+            <hr class="mgb-30">
+
+            <span class="error" id="errorCaido"></span>
+
+        </div>
+
+        <div id="burp" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">Burp Suite</h1>
+            <p>Welcome to the Burp Suite webhook menu. Connect DOMLogger++ to the Burp Suite extension to receive and analyze JavaScript sink findings.</p>
+
+            <div class="mgt-20 mgb-30">
+                <h3>Setup Instructions</h3>
+                <ol style="text-align: left; line-height: 2;">
+                    <li>Install the <b>DOMLogger++ Burp Extension</b> in Burp Suite</li>
+                    <li>The extension starts a webhook server on <code>http://localhost:8089/webhook</code></li>
+                    <li>Click <b>"Enable Burp Suite Integration"</b> below</li>
+                    <li>Browse through Burp's proxy - findings will appear in the DOMLogger++ tab in Burp</li>
+                </ol>
+            </div>
+
+            <div class="mgb-30" style="text-align: left;">
+                <h3>Configuration</h3>
+
+                <div class="mgt-15 mgb-20">
+                    <label style="display: block; margin-bottom: 10px;">
+                        <b>Webhook URL:</b>
+                    </label>
+                    <input id="burpURL" name="burpURL" placeholder="http://localhost:8089/webhook" value="http://localhost:8089/webhook" width="100%" style="width: 100%;">
+                    <p><small>Default: <code>http://localhost:8089/webhook</code> (change if you configured a different port)</small></p>
+                </div>
+
+                <div class="mgt-15 mgb-20" style="text-align: center;">
+                    <button id="burp-enable-btn" class="oauth-btn caido mgb-20" style="width: auto; padding: 12px 24px;">
+                        <div class="provider-text">Enable Burp Suite Integration</div>
+                    </button>
+                    <button id="burp-disable-btn" class="oauth-btn mgb-20" style="width: auto; padding: 12px 24px; display: none; background-color: #dc3545;">
+                        <div class="provider-text">Disable Burp Suite Integration</div>
+                    </button>
+                    <button id="burp-test-btn" class="mgb-20" style="padding: 10px 20px;">
+                        Test Connection
+                    </button>
+                </div>
+
+                <div id="burp-status" class="mgt-20" style="display: none;">
+                    <p><b>Status:</b> <span id="burp-status-text">Not configured</span></p>
+                    <p><small>When enabled, findings are automatically sent to Burp Suite via webhook</small></p>
+                </div>
+            </div>
+
+            <hr class="mgb-30">
+
+            <div class="mgt-20 mgb-20">
+                <h3>Burp Suite Extension Features</h3>
+                <ul style="text-align: left; line-height: 1.8;">
+                    <li>✅ Persistent SQLite storage of all findings</li>
+                    <li>✅ Advanced search syntax: <code>sink.tag.eq:"XSS" AND sink.data.cont:"alert"</code></li>
+                    <li>✅ AI-powered exploitability scoring (1-5 scale) via OpenRouter</li>
+                    <li>✅ Enhanced stack traces with actual source code from proxy history</li>
+                    <li>✅ Project management and recording sessions</li>
+                    <li>✅ Bulk operations: delete, export, AI analysis</li>
+                    <li>✅ Comprehensive keyboard shortcuts</li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <div id="burp-test-result" class="mgt-20" style="display: none;">
+                <h3>Connection Test Result</h3>
+                <pre id="burp-test-output" style="background: #1e1e1e; padding: 15px; border-radius: 5px; overflow-x: auto;"></pre>
+            </div>
+
+            <span class="error" id="errorBurp"></span>
+        </div>
+
+        <div id="webhook" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">Webhook</h1>
+            <p>Welcome to the webhook configuration menu. Here, you can set up an HTTP webhook logger.</p>
+            
+            <div class="mgt-10 mgb-10">
+                <h3>Request URL</h3>
+                <input id="webhookURL" name="webhookURL" placeholder="https://mizu.re/" width="100%"><br>
+            </div>
+
+            <div class="mgt-10 mgb-10">
+                <h3>Request Headers</h3>
+                <div class="header-container">
+                    <div id="webhook-headers-list" class="mgb-10">
+                        <!-- Headers will be added here dynamically -->
+                    </div>
+                    <div class="header-input-row mgt-10 mgb-10">
+                        <input id="webhook-headerName" placeholder="Header name" style="width: 30%;" class="mgr-10">
+                        <input id="webhook-headerValue" placeholder="Header value" style="width: 50%;" class="mgr-10">
+                        <button id="webhook-addHeader" class="mgr-10 mgl-10">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mgt-10 mgb-10">
+                <h3>Request Body Template</h3>
+                <p class="mgb-5"><small>Use <code>{data}</code> as a placeholder for the actual data in your JSON template.</small></p>
+                <textarea id="webhook-body" class="mgt-5 mgb-5" rows="4" style="width: 100%; font-family: monospace;">{ "data": {data} }</textarea>
+                <div class="mgb-10">
+                    <button id="webhook-savebody" class="mgt-10">Save Template</button>
+                </div>
+            </div>
+            <span class="error" id="errorWebhook"></span>
+        </div>
+
+        <div id="devtools" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgt-b0">Devtools</h1>
+            <p>Welcome to the DevTools configuration menu. Here you can choose whether or not you want to see the DOMLogger++ tab in DevTools.</p>
+            <div class="mgt-30 mgb-10">
+                <button class="devtools-button" data-data="yes" style="background-color: #1B1B1D"><b>YES</b></button>
+                <button class="devtools-button" data-data="no"><b>NO</b></button>
+            </div>
+        </div>
+
+        <div id="customize" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">Customize table</h1>
+            <p>Welcome to the table customization menu. Here, you can customize the DOMLogger++ results table to suit your needs. By clicking on the column name, you can adjust which columns you want to see. By dragging and dropping the columns, you can arrange the final order :D</p>
+            <hr class="mgt-30 mgb-20">
+            <div id="colList" class="mgt-20">
+                <span>dupKey</span> |
+                <span>tag</span>   |
+                <span>alert</span>  |
+                <span>type</span>   |
+                <span>date</span>   |
+                <span>href</span>   |
+                <span>frame</span>  |
+                <span>sink</span>   |
+                <span>data</span>   |
+                <span>trace</span>  |
+                <span>debug</span>
+            </div>
+            <hr class="mgt-20 mgb-50">
+            <table id="tablePreview" class="display">
+                <thead>
+                    <tr>
+                        <th>dupKey</th>
+                        <th>Tag</th>
+                        <th>Alert</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Href</th>
+                        <th>Frame</th>
+                        <th>Sink</th>
+                        <th>Data</th>
+                        <th>Trace</th>
+                        <th>Debug</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <label for="devtools-font-size">Devtools font-size:</label>
+            <input id="devtools-font-size" class="mgb-30" type="number" min="1" max="50" value="18" style="width: 10%;"><br>
+
+            <button id="table-reset" class="table-button"><b>Reset</b></button>
+            <button id="table-default" class="table-button"><b>Default</b></button>
+            <button id="table-save" class="table-button mgb-10"><b>Save</b></button><br>
+            <span class="error" id="errorTable"></span>
+        </div>
+
+        <div id="customizeColor" class="tab" style="height: 90%; display: none;">
+            <h1 class="mgb-10">Customize colors</h1>
+            <p>Welcome to the table color customization menu. Here you can customize the global extension theme to match all your desires <3</p>
+            <div class="mgt-30" id="color-container">
+                <div class="mgr-100">
+                    <span class="mgr-10" style="font-size: 25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text</span>
+                    <input id="text-color" name="text-color" class="color-picker" type="color">
+                </div>
+                <div>
+                    <input id="background-color" name="background-color" class="color-picker" type="color">
+                    <span class="mgl-10" style="font-size: 25px;">Background</span>
+                </div>
+            </div>
+            <div class="mgb-20">
+            <button id="color-reset" class="devtools-button mgr-10"><b>Reset</b></button>
+            <button id="color-default" class="devtools-button"><b>Default</b></button>
+            </div>
+            <button id="color-confirm" class="devtools-button mgb-30"><b>Confirm</b></button><br>
+            <iframe id="preview-iframe" scrolling="no" src="#about" onloda="this.contentWindow.scrollTo(0, 0);"></iframe>
+        </div>
+
+        <div id="about" class="tab" style="display: none; width: 90%; padding-left: 5%;">
+            <h1 class="mgb-10">About</h1>
+            <p>DOMLogger++ is a browser extension developed for web developers and security researchers. It hooks into specific JavaScript sinks, helping users understand how web scripts operate. With customizable JSON settings, users can adjust how the extension works according to their needs.</p>
+            <p>This tool is especially useful for those looking to identify security risks in web applications. By offering insights into JavaScript interactions, DOMLogger++ can help spot potential vulnerabilities in websites.</p>
+            <p> 2025 <a class="c-link" href="https://twitter.com/kevin_mizu" target="_blank">kevin_mizu</a>. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
