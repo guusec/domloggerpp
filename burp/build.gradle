@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '8.3.5'
+}
+
+group = 'io.github.kevin-mizu'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Burp Suite API
+    implementation 'net.portswigger.burp.extender:burp-extender-api:2.3'
+
+    // SQLite database
+    implementation 'org.xerial:sqlite-jdbc:3.45.2.0'
+
+    // HTTP server (embedded Jetty)
+    implementation 'org.eclipse.jetty:jetty-server:11.0.20'
+    implementation 'org.eclipse.jetty:jetty-servlet:11.0.20'
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
+    // JSON processing
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // HTTP client for OpenRouter API
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.12'
+    implementation 'org.slf4j:slf4j-simple:2.0.12'
+}
+
+// Create a fat JAR with all dependencies
+shadowJar {
+    archiveBaseName.set('domloggerpp-burp')
+    archiveClassifier.set('')
+    archiveVersion.set(version.toString())
+
+    // Merge service files
+    mergeServiceFiles()
+
+    // Exclude signatures
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+
+    manifest {
+        attributes 'Main-Class': 'burp.BurpExtender'
+    }
+}
+
+build.dependsOn shadowJar
+
+// Compile with UTF-8 encoding
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
